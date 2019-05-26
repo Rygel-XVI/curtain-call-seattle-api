@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  dates: 2019-05-26 13:28:15
+  description: MyText
+  theater_id: 1
+
+two:
+  title: MyString
+  dates: 2019-05-26 13:28:15
+  description: MyText
+  theater_id: 1
