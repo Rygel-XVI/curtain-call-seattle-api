@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: curtain-call-seattle-api_production
-  username: curtain-call-seattle-api
-  password: <%= ENV['CURTAIN-CALL-SEATTLE-API_DATABASE_PASSWORD'] %>
+  # username: curtain-call-seattle-api
+  # password: <%= ENV['CURTAIN-CALL-SEATTLE-API_DATABASE_PASSWORD'] %>
