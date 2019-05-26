@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# curtain-call-seattle-api
+Rails backbone for Curtain Call Seattle App
+>>>>>>> 4d31b3c878f0acc468cb72a90a2702af6bd4c379
