@@ -7,19 +7,19 @@
 # https://www.stgpresents.org/   includes moore, paramount, neptune
 # https://www.villagetheatre.org/   everett and issaquah locations
 
-class CurtainCallSeattle::Scraper
+class Scraper
 
     def self.scrape_urls
     begin
       fifth = self.scrape_the_5th('https://www.5thavenue.org/boxoffice#current')
-      CurtainCallSeattle::Show.create_shows_array(fifth)
+      Show.create_shows_array(fifth)
     rescue
       puts "5th Ave is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
     end
 
     begin
       sct = self.scrape_childrens('http://www.sct.org/onstage/')
-      CurtainCallSeattle::Show.create_shows_array(sct)
+      Show.create_shows_array(sct)
 
     rescue
       puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
@@ -27,7 +27,7 @@ class CurtainCallSeattle::Scraper
 
     begin
       paramount = self.scrape_paramount('https://seattle.broadway.com/')
-      CurtainCallSeattle::Show.create_shows_array(paramount)
+      Show.create_shows_array(paramount)
     rescue
       puts "Paramount Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
     end
@@ -37,7 +37,7 @@ class CurtainCallSeattle::Scraper
     def self.scrape_the_5th(url)
         doc = Nokogiri::HTML(open(url))
         a = doc.css("td .zero, td .guts div")
-        the5th = CurtainCallSeattle::Theater.new
+        the5th = Theater.new
         the5th.location = "1308 5th Ave, Seattle, WA 98101"
         the5th.name = "The 5th Avenue Theater"
 
@@ -82,7 +82,7 @@ class CurtainCallSeattle::Scraper
         doc = Nokogiri::HTML(open(url))
         a = doc.css("div.season-production-listing div.row-production-listing")
 
-        sct = CurtainCallSeattle::Theater.new
+        sct = Theater.new
         sct.location = "201 Thomas St, Seattle, WA 98109"
         sct.name = "Seattle Children's Theater"
 
@@ -128,7 +128,7 @@ class CurtainCallSeattle::Scraper
       begin
         doc = Nokogiri::HTML(open(url))
         a = doc.css(".engagement-card__title")
-        paramount = CurtainCallSeattle::Theater.new
+        paramount = Theater.new
         paramount.location = "911 Pine St, Seattle, WA 98101"
         paramount.name = "The Paramount Theater"
 
@@ -153,6 +153,7 @@ class CurtainCallSeattle::Scraper
     end
 
     # takes in an opened url to traverse to the dates. converts the date into a Date object
+    # add filter for data-engagement-filter-series   to determine what year should be appended
     def self.create_dates_paramount(i)
       begin
         dates = i.scan(/[a-zA-Z]{3,}\s[0-9]+/)
