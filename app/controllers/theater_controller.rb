@@ -8,13 +8,16 @@ class TheaterController < ApplicationController
 
 # creates new scraper and scrapes the specified theater IF ti has not been updated this day.
   def update
-    # binding.pry
-    # check_update_theater = Theater.all.first
-    # if !!check_update_theater
-    # end
+    update_db_if_needed
   end
 
-private
+  private
+
+  def update_db_if_needed
+    if needs_update?
+      Theater.scrape
+    end
+  end
 
   def needs_update?
     if (Theater.all.size < 1 || enough_time_passed?)
@@ -23,6 +26,7 @@ private
   end
 
   def enough_time_passed?
+    puts "time"
     t = (Time.now - Theater.all.first.last_updated)/3600
     t > 24
   end
