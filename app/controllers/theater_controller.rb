@@ -16,18 +16,21 @@ class TheaterController < ApplicationController
 
   def update_db_if_needed
     if needs_update?
+      puts "3"
       Theater.scrape
     end
   end
 
   def needs_update?
     if (Theater.all.size < 1 || enough_time_passed?)
-      puts "needs_update"
+      puts "2"
+      return true
     end
+    return false
   end
 
   def enough_time_passed?
-    puts "time"
+    puts "1"
     t = (Time.now - Theater.all.first.last_updated)/3600
     t > 24
   end

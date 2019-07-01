@@ -2,7 +2,7 @@ class Theater < ApplicationRecord
   has_many :shows
 
   def self.scrape
-    puts "here"
+    puts "4"
   end
 
 end
