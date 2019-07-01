@@ -3,10 +3,6 @@ class TheaterController < ApplicationController
   def index
     theaters = Theater.all
     byebug
-    if theaters.size < 1
-      Theater.scrape
-    end
-
     render json: theaters
   end
 
@@ -18,8 +14,17 @@ class TheaterController < ApplicationController
     # end
   end
 
+private
 
+  def needs_update?
+    if (Theater.all.size < 1 || enough_time_passed?)
+      puts "needs_update"
+    end
+  end
 
-
+  def enough_time_passed?
+    t = (Time.now - Theater.all.first.last_updated)/3600
+    t > 24
+  end
 
 end
