@@ -1,6 +1,6 @@
 require 'open-uri'
 
-module Scrapers
+# module Scrapers
   class SeattleChildrensTheater
 
     def self.scrape
@@ -68,4 +68,4 @@ module Scrapers
     end
 
   end
-end
+# end

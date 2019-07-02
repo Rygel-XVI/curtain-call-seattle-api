@@ -3,6 +3,7 @@ class Theater < ApplicationRecord
 
   def self.scrape
     puts "4"
+    byebug
   end
 
 end
