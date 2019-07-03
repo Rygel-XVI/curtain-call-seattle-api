@@ -11,6 +11,7 @@ require 'open-uri'
 
 
         # breaks here???
+        binding.pry
         Show.create_shows_array(sct)
       rescue
         puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
@@ -39,10 +40,12 @@ require 'open-uri'
         sct.location = "201 Thomas St, Seattle, WA 98109"
         sct.name = "Seattle Children's Theater"
         puts "here"
+
+        # update dates to parse into start_date: and end_date:
         a.map{|i|
           {
-          name: i.css("div.col-text a")[0].text,
-          dates: create_dates_childrens(i),
+          title: i.css("div.col-text a")[0].text,
+          dates: create_dates_childrens(i),   ##<--fix this
           theater: sct,
           description: parse_description_childrens(i.css("div.col-text a")[0]["href"])
         }

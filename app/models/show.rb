@@ -2,7 +2,8 @@ class Show < ApplicationRecord
   belongs_to :theater
 
   def self.create_shows_array(show_array)
-    show_array.each {|show| CurtainCallSeattle::Show.new(show) if show != nil}
+    binding.pry
+    show_array.each {|show| Show.new(show) if show != nil}
   end
 
   def self.get_shows_by_month(month)
