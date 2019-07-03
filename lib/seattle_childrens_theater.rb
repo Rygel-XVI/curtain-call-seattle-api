@@ -5,7 +5,12 @@ require 'open-uri'
 
     def self.scrape
       begin
+        byebug
         sct = self.scrape_childrens('http://www.sct.org/onstage/')
+        puts "sct"
+
+
+        # breaks here???
         Show.create_shows_array(sct)
       rescue
         puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
@@ -13,8 +18,10 @@ require 'open-uri'
     end
 
     def self.scrape_childrens(url)
+      puts "scrape_childrens"
       begin
         doc = Nokogiri::HTML(open(url))
+        puts "opened doc"
         a = doc.css("ul#menu-main-navigation li a")[0]["href"]
         shows_sct('http://www.sct.org/' + a)
       rescue
@@ -23,6 +30,7 @@ require 'open-uri'
     end
 
     def self.shows_sct(url)
+      puts "shows_sct"
       begin
         doc = Nokogiri::HTML(open(url))
         a = doc.css("div.season-production-listing div.row-production-listing")
@@ -30,7 +38,7 @@ require 'open-uri'
         sct = Theater.new
         sct.location = "201 Thomas St, Seattle, WA 98109"
         sct.name = "Seattle Children's Theater"
-
+        puts "here"
         a.map{|i|
           {
           name: i.css("div.col-text a")[0].text,

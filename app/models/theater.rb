@@ -4,6 +4,7 @@ class Theater < ApplicationRecord
   def self.scrape
     puts "4"
     byebug
+    SeattleChildrensTheater.scrape
   end
 
   def get_shows_by_name
