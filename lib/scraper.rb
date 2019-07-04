@@ -7,6 +7,9 @@
 # https://www.stgpresents.org/   includes moore, paramount, neptune
 # https://www.villagetheatre.org/   everett and issaquah locations
 
+
+# make into superclass that simply calls each theater scraper class individually
+
 class Scraper
 
     def self.scrape_urls
