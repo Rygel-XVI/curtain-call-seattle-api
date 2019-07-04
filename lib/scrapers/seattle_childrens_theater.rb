@@ -1,9 +1,10 @@
 require 'open-uri'
 
-# module Scrapers
+module Scrapers
   class SeattleChildrensTheater
 
     def self.scrape
+      puts "here"
       begin
         sct = self.scrape_childrens('http://www.sct.org/onstage/')
         Show.create_shows_array(sct)
@@ -68,4 +69,4 @@ require 'open-uri'
     end
 
   end
-# end
+end
