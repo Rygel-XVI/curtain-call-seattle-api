@@ -7,14 +7,11 @@ require 'open-uri'
 
     def self.scrape
       begin
-        byebug
         sct = self.scrape_childrens('http://www.sct.org/onstage/')
-        puts "sct"
 
-
-        # breaks here???
-        binding.pry
-        Show.create_shows_array(sct)
+        # returns array of shows and theaters. put into new function to save it all
+        s = Show.create_shows_array(sct)
+        byebug
       rescue
         puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
       end
@@ -33,7 +30,6 @@ require 'open-uri'
     end
 
     def self.shows_sct(url)
-      puts "shows_sct"
       begin
         doc = Nokogiri::HTML(open(url))
         a = doc.css("div.season-production-listing div.row-production-listing")
@@ -43,11 +39,12 @@ require 'open-uri'
         sct.name = "Seattle Children's Theater"
         puts "here"
 
-        # update dates to parse into start_date: and end_date:
         a.map{|i|
+          dates = create_dates_childrens(i)
           {
           title: i.css("div.col-text a")[0].text,
-          dates: create_dates_childrens(i),   ##<--fix this
+          start_date: dates.first,
+          end_date: dates.last,
           theater: sct,
           description: parse_description_childrens(i.css("div.col-text a")[0]["href"])
         }
