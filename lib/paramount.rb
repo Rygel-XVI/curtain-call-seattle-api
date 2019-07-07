@@ -3,7 +3,7 @@ require 'open-uri'
 # make into superclass Scraper with sublclasses for each theater?
 
 # module Scrapers
-  class Paramount
+  class Paramount < Scraper
 
     def self.scrape
 
@@ -25,6 +25,7 @@ require 'open-uri'
         paramount = Theater.new
         paramount.location = "911 Pine St, Seattle, WA 98101"
         paramount.name = "The Paramount Theater"
+        paramount.klass = "Paramount"
         paramount.save
 
       end

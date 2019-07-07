@@ -1,7 +1,7 @@
 require 'open-uri'
 
 
-class TheFifthAvenueTheater
+class TheFifthAvenueTheater < Scraper
 
   def self.scrape
     begin
@@ -20,6 +20,7 @@ class TheFifthAvenueTheater
       the5th = Theater.new
       the5th.location = "1308 5th Ave, Seattle, WA 98101"
       the5th.name = "The 5th Avenue Theater"
+      the5th.klass = "TheFifthAvenueTheater"
       the5th.save
 
     end
@@ -34,7 +35,7 @@ class TheFifthAvenueTheater
 
     the5th = TheFifthAvenueTheater.find_or_create_the_fifth
     a.map do |i|
-      
+
       if (i.text !~ /\w/)
         next
       else

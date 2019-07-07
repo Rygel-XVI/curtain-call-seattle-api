@@ -3,7 +3,7 @@ require 'open-uri'
 # make into superclass Scraper with sublclasses for each theater?
 
 # module Scrapers
-  class SeattleChildrensTheater
+  class SeattleChildrensTheater < Scraper
 
     def self.scrape
       begin
@@ -25,6 +25,7 @@ require 'open-uri'
         sct = Theater.new
         sct.location = "201 Thomas St, Seattle, WA 98109"
         sct.name = "Seattle Children's Theater"
+        sct.klass = "SeattleChildrensTheater"
         sct.save
 
       end
