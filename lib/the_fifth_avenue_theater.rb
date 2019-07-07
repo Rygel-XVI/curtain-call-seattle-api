@@ -6,7 +6,6 @@ class TheFifthAvenueTheater < Scraper
   def self.scrape
     begin
       fifth = self.scrape_the_5th('https://www.5thavenue.org/boxoffice#current')
-      binding.pry
       Show.create_shows_array(fifth)
     rescue
       puts "5th Ave is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"

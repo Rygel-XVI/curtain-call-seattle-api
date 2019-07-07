@@ -1,15 +1,11 @@
 require 'open-uri'
 
-# make into superclass Scraper with sublclasses for each theater?
-
-# module Scrapers
   class Paramount < Scraper
 
     def self.scrape
 
       begin
         shows = self.scrape_paramount('https://seattle.broadway.com/')
-        binding.pry
         Show.create_shows_array(shows)
       rescue
         puts "Paramount Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
@@ -52,7 +48,6 @@ require 'open-uri'
 
     def self.scrape_paramount_show(url, paramount)
       doc = Nokogiri::HTML(open(url))
-      # binding.pry
       dates = create_dates_paramount(doc.css(".engagement-card__content .engagement-card__performance-dates").text)
 
       {
@@ -70,7 +65,7 @@ require 'open-uri'
       begin
         dates = i.scan(/[a-zA-Z]{3,}\s[0-9]+/)
         y = dates.map {|x| Date.parse(x)}
-(y[0]...y[1])
+        (y[0]...y[1])
       rescue
         puts "dates_paramount not working"
       end
@@ -78,4 +73,3 @@ require 'open-uri'
 
 
   end
-# end
