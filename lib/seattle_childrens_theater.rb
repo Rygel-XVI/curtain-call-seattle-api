@@ -3,7 +3,7 @@ require 'open-uri'
 # make into superclass Scraper with sublclasses for each theater?
 
 # module Scrapers
-  class SeattleChildrensTheater < Scraper
+  class SeattleChildrensTheater
 
     def self.scrape
       begin
