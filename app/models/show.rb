@@ -3,7 +3,7 @@ class Show < ApplicationRecord
 
   def self.create_shows_array(show_array)
     binding.pry
-    show_array.each {|show| Show.new(show) if show != nil}
+    show_array.each {|show| Show.create(show) if show != nil}
   end
 
   def self.get_shows_by_month(month)

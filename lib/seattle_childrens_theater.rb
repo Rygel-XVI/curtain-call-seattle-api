@@ -3,19 +3,36 @@ require 'open-uri'
 # make into superclass Scraper with sublclasses for each theater?
 
 # module Scrapers
-  class SeattleChildrensTheater
+  class SeattleChildrensTheater < Scraper
 
     def self.scrape
       begin
-        sct = self.scrape_childrens('http://www.sct.org/onstage/')
+        shows = self.scrape_childrens('http://www.sct.org/onstage/')
 
         # returns array of shows and theaters. put into new function to save it all
-        s = Show.create_shows_array(sct)
+        s = Show.create_shows_array(shows)
         byebug
       rescue
         puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
       end
     end
+
+
+    # belongs in the Theater model
+    def self.find_or_create_sct
+      if (!Theater.find_by(name: "Seattle Children's Theater"))
+
+        sct = Theater.new
+        sct.location = "201 Thomas St, Seattle, WA 98109"
+        sct.name = "Seattle Children's Theater"
+        sct.save
+
+      end
+
+      Theater.find_by(name: "Seattle Children's Theater")
+    end
+
+
 
     def self.scrape_childrens(url)
       puts "scrape_childrens"
@@ -30,14 +47,12 @@ require 'open-uri'
     end
 
     def self.shows_sct(url)
+      puts "shows_sct"
       begin
         doc = Nokogiri::HTML(open(url))
         a = doc.css("div.season-production-listing div.row-production-listing")
 
-        sct = Theater.new
-        sct.location = "201 Thomas St, Seattle, WA 98109"
-        sct.name = "Seattle Children's Theater"
-        puts "here"
+        sct = SeattleChildrensTheater.find_or_create_sct
 
         a.map{|i|
           dates = create_dates_childrens(i)
