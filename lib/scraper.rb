@@ -14,15 +14,6 @@ class Scraper
 
   end
 
-  def self.theater_created?(name)
-    # checks if theater exists
-
-  end
-
-  def self.find_or_create_theater(name, address)
-
-
-  end
 
   def create_shows_array(shows)
     Show.create_shows_array(shows)
