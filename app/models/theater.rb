@@ -1,10 +1,12 @@
 class Theater < ApplicationRecord
   has_many :shows
 
+  def self.find_by_name(name)
+    find_by(name: name)
+  end
+
   def self.scrape
-    puts "4"
-    byebug
-    SeattleChildrensTheater.scrape
+
   end
 
   def get_shows_by_name

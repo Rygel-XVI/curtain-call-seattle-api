@@ -15,19 +15,19 @@ require 'open-uri'
 
 
     # belongs in the Theater model
-    def self.find_or_create_paramount
-      if (!Theater.find_by(name: "The Paramount Theater"))
-
-        paramount = Theater.new
-        paramount.location = "911 Pine St, Seattle, WA 98101"
-        paramount.name = "The Paramount Theater"
-        paramount.klass = "Paramount"
-        paramount.save
-
-      end
-
-      Theater.find_by(name: "The Paramount Theater")
-    end
+    # def self.find_or_create_paramount
+    #   if (!Theater.find_by(name: "The Paramount Theater"))
+    #
+    #     paramount = Theater.new
+    #     paramount.location = "911 Pine St, Seattle, WA 98101"
+    #     paramount.name = "The Paramount Theater"
+    #     paramount.klass = "Paramount"
+    #     paramount.save
+    #
+    #   end
+    #
+    #   Theater.find_by(name: "The Paramount Theater")
+    # end
 
 
     def self.scrape_paramount(url)
@@ -35,7 +35,7 @@ require 'open-uri'
         doc = Nokogiri::HTML(open(url))
         a = doc.css(".engagement-card__title")
 
-        paramount = Paramount.find_or_create_paramount
+        paramount = Theater.find_by_name("The Paramount Theater")
 
         a.map do |i|
           show_url = i.children[0].values[0]

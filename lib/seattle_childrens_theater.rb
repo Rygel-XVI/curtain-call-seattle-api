@@ -13,19 +13,19 @@ class SeattleChildrensTheater < Scraper
 
 
   # belongs in the Theater model
-  def self.find_or_create_sct
-    if (!Theater.find_by(name: "Seattle Children's Theater"))
-
-      sct = Theater.new
-      sct.location = "201 Thomas St, Seattle, WA 98109"
-      sct.name = "Seattle Children's Theater"
-      sct.klass = "SeattleChildrensTheater"
-      sct.save
-
-    end
-
-    Theater.find_by(name: "Seattle Children's Theater")
-  end
+  # def self.find_or_create_sct
+  #   if (!Theater.find_by(name: "Seattle Children's Theater"))
+  #
+  #     sct = Theater.new
+  #     sct.location = "201 Thomas St, Seattle, WA 98109"
+  #     sct.name = "Seattle Children's Theater"
+  #     sct.klass = "SeattleChildrensTheater"
+  #     sct.save
+  #
+  #   end
+  #
+  #   Theater.find_by(name: "Seattle Children's Theater")
+  # end
 
 
 
@@ -47,7 +47,8 @@ class SeattleChildrensTheater < Scraper
       doc = Nokogiri::HTML(open(url))
       a = doc.css("div.season-production-listing div.row-production-listing")
 
-      sct = SeattleChildrensTheater.find_or_create_sct
+      # sct = SeattleChildrensTheater.find_or_create_sct
+      sct = Theater.find_by_name("Seattle Children's Theater")
 
       a.map{|i|
         dates = create_dates_childrens(i)

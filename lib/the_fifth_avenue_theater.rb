@@ -12,27 +12,29 @@ class TheFifthAvenueTheater < Scraper
     end
   end
 
-  def self.find_or_create_the_fifth
-
-    if (!Theater.find_by(name: "The 5th Avenue Theater"))
-
-      the5th = Theater.new
-      the5th.location = "1308 5th Ave, Seattle, WA 98101"
-      the5th.name = "The 5th Avenue Theater"
-      the5th.klass = "TheFifthAvenueTheater"
-      the5th.save
-
-    end
-
-    Theater.find_by(name: "The 5th Avenue Theater")
-  end
+  # def self.find_or_create_the_fifth
+  #
+  #   if (!Theater.find_by(name: "The 5th Avenue Theater"))
+  #
+  #     the5th = Theater.new
+  #     the5th.location = "1308 5th Ave, Seattle, WA 98101"
+  #     the5th.name = "The 5th Avenue Theater"
+  #     the5th.klass = "TheFifthAvenueTheater"
+  #     the5th.save
+  #
+  #   end
+  #
+  #   Theater.find_by(name: "The 5th Avenue Theater")
+  # end
 
 
   def self.scrape_the_5th(url)
     doc = Nokogiri::HTML(open(url))
     a = doc.css("td .zero, td .guts div")
 
-    the5th = TheFifthAvenueTheater.find_or_create_the_fifth
+    # the5th = TheFifthAvenueTheater.find_or_create_the_fifth
+    the5th = Theater.find_by_name("The 5th Avenue Theater")
+
     a.map do |i|
 
       if (i.text !~ /\w/)
