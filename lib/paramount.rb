@@ -9,6 +9,7 @@ require 'open-uri'
 
       begin
         shows = self.scrape_paramount('https://seattle.broadway.com/')
+        binding.pry
         Show.create_shows_array(shows)
       rescue
         puts "Paramount Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
@@ -37,7 +38,7 @@ require 'open-uri'
         doc = Nokogiri::HTML(open(url))
         a = doc.css(".engagement-card__title")
 
-        parmount = Paramount.find_or_create_paramount
+        paramount = Paramount.find_or_create_paramount
 
         a.map do |i|
           show_url = i.children[0].values[0]
@@ -51,9 +52,12 @@ require 'open-uri'
     def self.scrape_paramount_show(url, paramount)
       doc = Nokogiri::HTML(open(url))
       # binding.pry
+      dates = create_dates_paramount(doc.css(".engagement-card__content .engagement-card__performance-dates").text)
+
       {
-      name: doc.css(".engagement-card__content .engagement-card__title").text,
-      dates: create_dates_paramount(doc.css(".engagement-card__content .engagement-card__performance-dates").text),
+      title: doc.css(".engagement-card__content .engagement-card__title").text,
+      start_date: dates.first,
+      end_date: dates.last,
       description: doc.css(".accordion__panel p").text,
       theater: paramount
     }
