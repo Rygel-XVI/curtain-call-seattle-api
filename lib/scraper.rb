@@ -5,9 +5,10 @@ class Scraper
   def self.scrape_theaters
     # for each theater checks if it exists, check when it was last updated if exists, update  if needed
     Theater.all.each do |theater|
-      binding.pry
       if ((Time.now.utc - theater.updated_at)/3600) > 24
-        create_shows(theater.klass.scrape)
+        theater.klass.constantize.scrape
+        theater.updated_at = Time.now.utc
+        theater.save
       end
     end
 
