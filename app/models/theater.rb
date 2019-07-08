@@ -21,4 +21,9 @@ class Theater < ApplicationRecord
     self.shows.map {|show| array << show if show.show_month_includes?(month)}
   end
 
+
+
 end
+
+
+# maybe add find or create theaters so that they don't have to be manually loaded in case of new db?

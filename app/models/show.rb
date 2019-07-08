@@ -1,6 +1,8 @@
 class Show < ApplicationRecord
   belongs_to :theater
 
+
+# need to change this so it only creates a new show if it doesn't already exist
   def self.create_shows_array(show_array)
     binding.pry
     show_array.each {|show| Show.create(show) if show != nil}
