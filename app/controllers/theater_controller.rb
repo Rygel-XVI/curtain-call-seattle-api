@@ -8,6 +8,7 @@ class TheaterController < ApplicationController
 
 # creates new scraper and scrapes the specified theater IF ti has not been updated this day.
 # this should all be first call when app loads
+#   change back to update later so it matches proper conventions
   def scrape
     update_db_if_needed
   end
