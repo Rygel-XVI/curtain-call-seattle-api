@@ -6,28 +6,12 @@ require 'open-uri'
 
       begin
         shows = self.scrape_paramount('https://seattle.broadway.com/')
-        Show.create_shows_array(shows)
+        Show.find_or_create_show(shows)
       rescue
         puts "Paramount Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
       end
 
     end
-
-
-    # belongs in the Theater model
-    # def self.find_or_create_paramount
-    #   if (!Theater.find_by(name: "The Paramount Theater"))
-    #
-    #     paramount = Theater.new
-    #     paramount.location = "911 Pine St, Seattle, WA 98101"
-    #     paramount.name = "The Paramount Theater"
-    #     paramount.klass = "Paramount"
-    #     paramount.save
-    #
-    #   end
-    #
-    #   Theater.find_by(name: "The Paramount Theater")
-    # end
 
 
     def self.scrape_paramount(url)

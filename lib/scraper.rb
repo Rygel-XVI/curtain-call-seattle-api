@@ -14,9 +14,4 @@ class Scraper
 
   end
 
-
-  def create_shows_array(shows)
-    Show.create_shows_array(shows)
-  end
-
 end

@@ -5,29 +5,11 @@ class SeattleChildrensTheater < Scraper
   def self.scrape
     begin
       shows = self.scrape_childrens('http://www.sct.org/onstage/')
-      Show.create_shows_array(shows)
+      Show.find_or_create_show(shows)
     rescue
       puts "Childrens Theater is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
     end
   end
-
-
-  # belongs in the Theater model
-  # def self.find_or_create_sct
-  #   if (!Theater.find_by(name: "Seattle Children's Theater"))
-  #
-  #     sct = Theater.new
-  #     sct.location = "201 Thomas St, Seattle, WA 98109"
-  #     sct.name = "Seattle Children's Theater"
-  #     sct.klass = "SeattleChildrensTheater"
-  #     sct.save
-  #
-  #   end
-  #
-  #   Theater.find_by(name: "Seattle Children's Theater")
-  # end
-
-
 
   def self.scrape_childrens(url)
     puts "scrape_childrens"

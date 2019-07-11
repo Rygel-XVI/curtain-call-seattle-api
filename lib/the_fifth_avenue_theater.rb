@@ -5,28 +5,12 @@ class TheFifthAvenueTheater < Scraper
 
   def self.scrape
     begin
-      fifth = self.scrape_the_5th('https://www.5thavenue.org/boxoffice#current')
-      Show.create_shows_array(fifth)
+      shows = self.scrape_the_5th('https://www.5thavenue.org/boxoffice#current')
+      Show.find_or_create_show(shows)
     rescue
       puts "5th Ave is broken. Please open issue at https://github.com/Rygel-XVI/curtain-call-seattle-cli-gem/issues"
     end
   end
-
-  # def self.find_or_create_the_fifth
-  #
-  #   if (!Theater.find_by(name: "The 5th Avenue Theater"))
-  #
-  #     the5th = Theater.new
-  #     the5th.location = "1308 5th Ave, Seattle, WA 98101"
-  #     the5th.name = "The 5th Avenue Theater"
-  #     the5th.klass = "TheFifthAvenueTheater"
-  #     the5th.save
-  #
-  #   end
-  #
-  #   Theater.find_by(name: "The 5th Avenue Theater")
-  # end
-
 
   def self.scrape_the_5th(url)
     doc = Nokogiri::HTML(open(url))
