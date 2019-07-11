@@ -21,4 +21,9 @@ RSpec.describe Show, type: :model do
    expect(s1.end_date).to be_a(Date)
  end
 
+# things to do
+  # build out hashes to test self.find_or_create_show *** priority
+  # build out tests for fetching shows by attributes after
+end
+
 end

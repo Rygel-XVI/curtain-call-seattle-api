@@ -29,7 +29,6 @@ class SeattleChildrensTheater < Scraper
       doc = Nokogiri::HTML(open(url))
       a = doc.css("div.season-production-listing div.row-production-listing")
 
-      # sct = SeattleChildrensTheater.find_or_create_sct
       sct = Theater.find_by_name("Seattle Children's Theater")
 
       a.map{|i|

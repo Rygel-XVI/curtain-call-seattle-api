@@ -5,7 +5,7 @@ class Show < ApplicationRecord
 # need to change this so it only creates a new show if it doesn't already exist
   def self.find_or_create_show(show_array)
     show_array.each do |show|
-
+      binding.pry
       if !Show.find_by(title: show[:title])
         Show.create(show)
       end

@@ -16,7 +16,6 @@ class TheFifthAvenueTheater < Scraper
     doc = Nokogiri::HTML(open(url))
     a = doc.css("td .zero, td .guts div")
 
-    # the5th = TheFifthAvenueTheater.find_or_create_the_fifth
     the5th = Theater.find_by_name("The 5th Avenue Theater")
 
     a.map do |i|

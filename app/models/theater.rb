@@ -9,11 +9,15 @@ class Theater < ApplicationRecord
     paramount.name = "The Paramount Theater"
     paramount.klass = "Paramount"
     paramount.save
+    paramount.updated_at = Time.now.utc - 90000
+    paramount.save
 
     the5th = Theater.new
     the5th.location = "1308 5th Ave, Seattle, WA 98101"
     the5th.name = "The 5th Avenue Theater"
     the5th.klass = "TheFifthAvenueTheater"
+    the5th.save
+    the5th.updated_at = Time.now.utc - 90000
     the5th.save
 
     sct = Theater.new
