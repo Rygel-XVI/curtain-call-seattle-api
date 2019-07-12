@@ -24,6 +24,5 @@ RSpec.describe Show, type: :model do
 # things to do
   # build out hashes to test self.find_or_create_show *** priority
   # build out tests for fetching shows by attributes after
-end
 
 end
